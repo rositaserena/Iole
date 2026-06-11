@@ -1,0 +1,935 @@
+﻿﻿/* --- DEFINIZIONE FONT BASKERVILLE --- */
+
+/* 1. FONT PER I TITOLI (rivedere ma per ora non toccare) */ 
+@font-face {  
+  font-family: 'FontTitoli';
+  src: url('fonts/paragrafi/Regular.woff2') format('woff2'); 
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. FONT PER I PARAGRAFI E LE INTESTAZIONI (Regular, Bold, Italic) -- Font: Baskervville */
+@font-face {
+  font-family: 'FontParagrafi';
+  src: url('fonts/paragrafi/Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FontParagrafi';
+  src: url('fonts/paragrafi/Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FontParagrafi';
+  src: url('fonts/paragrafi/Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* 3. FONT PER IL GRECO -- Font: Arima */
+@font-face {
+  font-family: 'FontGreco';
+  src: url('fonts/greco/Greco.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FontGreco';
+  src: url('fonts/greco/greco-bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+:root {
+  color-scheme: light;
+  --text-color: #000;
+  /* I percorsi servono a definire i colori principali delle card per gestirli meglio */
+  --percorso-card-bg: #fdfcf9;
+  --percorso-card-border: #FFF4BD;
+  --percorso-accent: #E4FBDA;
+}
+/* Stile per l'HTML */
+html {
+  scroll-behavior: smooth;
+}
+/* Padding e bordi */
+* {
+  box-sizing: border-box;
+}
+/* Stile globale per il corpo della pagina */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'FontParagrafi', serif !important; 
+  font-weight: 400; 
+  background-color: #ffffff; 
+  color: var(--text-color);
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Sfondo con immagine per la HOME (index) */
+body.home-page {
+  background: url('illustrazioniiole/hero.png') center 25% / cover no-repeat fixed;
+}
+
+.greek, .greek-box blockquote {
+  font-family: 'FontGreco', Georgia, serif;
+  font-style: normal !important;
+}
+
+/* Elementi in grassetto */
+strong, b, .fw-bold {
+  font-weight: bold !important;
+}
+
+/* Intestazioni */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6, 
+.navbar-brand, 
+.nav-link, 
+.sidebar-left h5, 
+.percorso-card-title,
+.modal-title {
+  font-family: 'FontParagrafi', serif !important;
+  letter-spacing: 0.02em; 
+  font-style: normal !important;
+  font-weight: normal !important; 
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility !important; /* Migliora il disegno dei caratteri su Windows */
+  text-transform: none; 
+  -webkit-text-stroke: 0px !important;
+}
+
+.modal-title {
+  font-size: 1.5rem !important; /* x rimpicciolire titolo modal */
+  line-height: 1.1; /* x interlinea ridotta titolo modal */
+  margin-bottom: 0.20rem; /* x margine ridotto titolo modal */
+}
+
+.modal-description-label {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 0.04rem; 
+}
+
+.modal-long-description {
+  line-height: 1.4; /* Interlinea ridotta x paragrafi */
+}
+
+h5, .h5 {
+  font-size: 1.35rem !important; 
+}
+
+/* --- NAVBAR E RICERCA --- */
+.navbar-custom {
+  background: transparent;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* per stare sopra a tutte le sezioni sticky */
+}
+/* Colore per testi navbar */
+.navbar-custom.navbar-light .navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #000;
+  margin-left: 1.5rem; 
+  font-size: 1.4rem !important; 
+}
+
+/* Colore del testo al passaggio del mouse per "Iole" */
+.navbar-custom.navbar-light .navbar-brand:hover,
+.navbar-custom.navbar-light .navbar-brand:focus {
+  color: #ffd500 !important;
+}
+.navbar-custom.navbar-light .navbar-nav .nav-link {
+  color: #000;
+  font-size: 1.2rem !important; 
+}
+/* Colore del testo al passaggio del mouse per "home, testi, percorsi, galleria" */
+.navbar-custom.navbar-light .navbar-nav .nav-link:hover,
+.navbar-custom.navbar-light .navbar-nav .nav-link:focus {
+  color: #ffd500 !important;
+}
+/* Stile per il link attivo */
+.navbar-custom.navbar-light .navbar-nav .nav-link.active {
+  color: #000;
+  font-weight: normal; 
+}
+/* --- TENDINA PERCORSI (Hover Dropdown) --- */
+@media (min-width: 992px) {
+  .navbar-custom .nav-item.dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0; /* per evitare che il menu si chiuda muovendo il mouse */
+  }
+
+  /* Allineamento a destra della tendina */
+  .navbar-custom .dropdown-menu-end {
+    right: 0 !important;
+    left: auto !important;
+  }
+}
+/* Rimuove la freccetta (caret) dalla tendina della navbar */
+.navbar-custom .dropdown-toggle::after {
+  display: none !important;
+}
+.navbar-custom .dropdown-menu {
+  background-color: #ffffff; /* Menu a tendina */
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 0;
+}
+.navbar-custom .dropdown-item {
+  color: #000;
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem; 
+}
+.navbar-custom .dropdown-item:hover {
+  background-color: #FFF4BD;
+  color: #000;
+}
+
+/* --- FOOTER --- */
+.custom-bg-black {
+  background: #000;
+  color: #fff;
+}
+/* Colore dei link */
+.custom-bg-black a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+/* Sottolineatura al passaggio del mouse */
+.custom-bg-black a:hover {
+  color: #FFF4BD;
+  text-decoration: underline;
+}
+
+/* --- ANIMAZIONI E EFFETTI AL PASSAGGIO DEL MOUSE (HOVER) --- */
+a {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Effetto hover (giallo) per i tasti "Leggi tutto" */
+.btn-link:hover, 
+aside a:hover {
+  color: #FFF4BD !important;
+  background-color: rgb(0, 0, 0); 
+}
+
+.latin {
+  font-style: normal !important;
+}
+/* Separatore tra autori */
+.author-section {
+  padding: 1rem 0 0 0; /* Rimuove il padding inferiore */
+}
+/* modifiche per TABELLA TESTI*/
+.testi-table .accordion-item {
+  background-color: transparent;
+  border: none;
+}
+
+.testi-table .accordion-button {
+  padding: 0;
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  text-align: left;
+  box-shadow: none;
+}
+
+.testi-table .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  color: inherit;
+}
+
+.testi-table .accordion-button::after {
+  width: 1rem;
+  height: 1rem;
+  background-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.testi-table .accordion-button:disabled::after {
+  display: none; /* se non c'è nulla da espandere */
+}
+
+.author-section:not(:last-child) {
+  margin-bottom: 0.5rem; /* spazio tra gli autori */
+}
+
+/* --- EFFETTO SCROLL OVERLAY (STACKING CARDS) --- */
+.hero-header {
+  position: sticky;
+  top: 0;
+  min-height: 88vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; 
+  padding-left: 10%;      
+  z-index: 1;
+}
+
+.hero-header h1.display-1 {
+  font-size: 6.5rem;      
+  line-height: 0.9;       
+  text-align: left;       
+  letter-spacing: -0.01em; 
+  font-weight: normal !important;
+}
+
+.iole-about {
+  position: -webkit-sticky; /* supporto per Safari */
+  position: sticky;
+  top: 0;                   
+  min-height: 100vh;   /* x far occupare a ogni pannello/sezione tutta l'altezza dello schermo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0;
+  padding: 0 10% 15rem 10%; /* x aumentare margine in basso prima del footer */
+  width: 100%;
+  background-color: #ffffff; 
+  box-shadow: none; 
+  transition: box-shadow 0.3s ease;
+  z-index: 5;
+}
+
+/* Z-index per lo stacking delle sezioni */
+.iole-about:nth-of-type(1) {
+  justify-content: flex-start; 
+  padding-top: 2.5rem;         
+  z-index: 10;                
+}
+
+.iole-about:nth-of-type(2) {
+  justify-content: flex-start;
+  padding-top: 9rem; /* margine superiore aumentato */
+  z-index: 20;                 
+}
+
+/* Colori delle sezioni per la HOME */
+body.home-page .iole-about:nth-of-type(1) { background-color: #E4FBDA; }
+body.home-page .iole-about:nth-of-type(2) { background-color: #FFF4BD; }
+body.home-page .iole-about:nth-of-type(4) { background-color: #E4FBDA; }
+
+.iole-about:nth-of-type(3) {
+  z-index: 30;
+  justify-content: flex-start;
+  padding-top: 6rem; /* Ridotto il padding superiore per sollevare le card */
+}
+
+
+.iole-about:nth-of-type(1) h3, .iole-about:nth-of-type(2) h3, .iole-about:nth-of-type(3) h3, .iole-about:nth-of-type(4) h3 {
+  font-size: 4.0rem !important; 
+  margin-bottom: 2.5rem !important; 
+  line-height: 0.85 !important;
+  font-weight: normal !important;
+}
+.iole-about:nth-of-type(1) p, .iole-about:nth-of-type(2) p {
+  font-size: 1.15rem; 
+  line-height: 1.4;   
+}
+
+.iole-about .greek {
+  font-size: 1.25rem;
+}
+
+/* Riquadri/box testi in lingua classica */
+.greek-box {
+  background-color: #FFF7D2 !important;
+  border: 1px solid #000 !important;
+  padding: 20px;
+  border-radius: 0;
+  margin-top: 1rem !important; 
+  margin-bottom: 1rem !important; 
+  color: #000;
+  box-shadow: none;
+}
+.greek-box .greek {
+  font-size: 1.05rem !important; 
+}
+.greek-box .latin, 
+.greek-box .translation, 
+.greek-box p {
+  font-size: 0.95rem !important; 
+  line-height: 1.3;
+}
+
+.iole-about:nth-of-type(1) img {
+  transform: scale(0.9);
+  margin-top: -3rem;  
+}
+
+body.home-page .iole-about:nth-of-type(4) { 
+  z-index: 40;            /* GALLERIA */
+  justify-content: flex-start; /* titolo */
+  padding-top: 10rem;          
+}
+
+.iole-about {
+  overflow: visible;  
+}
+
+.iole-about h2 {
+  margin-top: 0;
+}
+
+/* --- SIDEBAR CARD (Fonti e Testimonianze) --- */
+.iole-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: none;
+}
+
+.iole-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.iole-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  text-align: center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+}
+
+.iole-card:hover .card-overlay {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+/* --- STILE ALBERO GENEALOGICO --- */
+.genealogy-container {
+  width: 100%;
+  padding: 20px;
+  overflow: visible; 
+}
+
+/* Nasconde la barra di scorrimento */
+.genealogy-container::-webkit-scrollbar {
+  display: none;
+}
+
+.genealogy-tree {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000;
+}
+
+/* Layout orizzontale albero */
+.horizontal-tree .tree-branch {
+  display: flex;
+  align-items: center; /* Centra il genitore rispetto ai figli */
+  position: relative;
+}
+
+/* Figli disposti ordinati in colonna */
+.horizontal-tree .children {
+  display: flex;
+  flex-direction: column; 
+  position: relative;
+  padding-left: 40px; 
+  margin-left: 0;
+}
+
+.genealogy-tree .node {
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #F2FFEC; 
+  border: 1px solid #000; 
+  border-radius: 0;
+  display: inline-block; 
+  min-width: 160px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Stile per i nodi cliccabili (gentiori) */
+.genealogy-tree .node.tree-parent {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #E4FBDA; 
+  padding-left: 40px;
+}
+
+/* Freccetta */
+.genealogy-tree .node.tree-parent::before {
+  content: "\25B6";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+  font-size: 0.9rem;
+  color: #000;
+  display: inline-block;
+}
+
+/* Rotazione della freccetta */
+.genealogy-tree .node.tree-parent.expanded::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.genealogy-tree .children {
+  margin-left: 45px; 
+  position: relative;
+  display: none;
+}
+
+.genealogy-tree .children.active {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* La linea verticale che collega i fratelli */
+.horizontal-tree .children::before {
+  content: ""; /* elemento fantasma */
+  position: absolute;
+  left: 0;
+  top: 25px;
+  bottom: 25px;
+  border-left: 1px solid #000; 
+}
+
+/* Linea orizzontale genitore - figli */
+.horizontal-tree .children::after {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  width: 40px;
+  border-top: 1px solid #000;
+  z-index: 1;
+}
+
+/* Linea orizzontale che entra a sinistra di ogni nodo figlio */
+.horizontal-tree .node::after {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  width: 40px;
+  border-top: 1px solid #000;
+  z-index: 1;
+}
+
+/* Nasconde la linea del primo nodo (la radice) */
+.horizontal-tree > .tree-branch > .node::after {
+  display: none;
+}
+
+/* --- SIDEBAR FONTI --- */
+.genealogy-main-content {
+  /* Padding x albero */
+  padding-right: 320px; 
+}
+
+.sidebar-fonti {
+
+  position: absolute;
+  right: 0;
+  top: 0; 
+  bottom: 0; 
+  overflow-y: auto; 
+  width: 300px;
+  background-color: #FFF7D2; 
+  padding: 2rem;
+  border-left: 1px solid #000 !important; 
+  z-index: 10; /* Per tenerla in primo piano */
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  transition: none;
+}
+
+/* Immagine papiro visibile su cellulari e tablet */
+@media (max-width: 991px) {
+  #genealogia-sezione .sidebar-fonti {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+/* Spaziatura tra i diversi blocchi della sidebar */
+.sidebar-block {
+  margin-bottom: 2.5rem;
+}
+
+/* Gestione responsive (essendo un sito ora solo per desktop prob non serve) */
+@media (max-width: 991px) {
+  .genealogy-main-content {
+    padding-right: 0; /* Rimuove il padding extra su mobile */
+  }
+  .sidebar-fonti {
+    position: static; 
+    width: 100%; 
+    transform: translateX(0); 
+    opacity: 1; 
+    visibility: visible;
+    margin-top: 4rem; 
+    background-color: #ffffff; 
+    border-left: none; 
+    padding-left: 2rem; 
+  }
+}
+
+/* --- SIDEBAR GESTIONE TESTO --- */
+.text-preview-box {
+  position: relative;
+  max-height: 140px; 
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  margin-bottom: 0.5rem;
+}
+
+.text-preview-box.expanded {
+  max-height: 1200px; 
+}
+
+
+.text-preview-box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(transparent, #FFF7D2); 
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.text-preview-box.expanded::after {
+  opacity: 0; 
+}
+
+/* --- EVIDENZIATORE GRECO --- */
+/* popup informativo */
+.greek-popover-trigger {
+  cursor: help;               
+  display: inline-block;
+  padding: 0 8px;             
+  border-radius: 50px;        
+  transition: background-color 0.3s ease; 
+  text-decoration: none;      
+  color: #0aac7c; /* Verde scuro per far risaltare i termini con popover */
+}
+
+/* Classe per evidenziare il testo in verde scuro */
+.highlight-green {
+  color: #0aac7c; /* Verde scuro per far risaltare i termini con popover */
+  display: inline-block;
+  font-weight: bold !important; /* Assicura il grassetto */
+  padding: 0 8px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.highlight-green:hover {
+  background-color: #E4FBDA; /* Sfondo verde chiaro all'hover */
+}
+
+/* Classe per evidenziare parola chiave*/
+.highlight-pink {
+  color: #5364d4; 
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 50px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; /* Transizione fluida per l'hover */
+}
+
+/* Effetto hover per il testo evidenziato */
+.highlight-pink:hover {
+  background-color: #edeffe; 
+}
+
+/* Cambio colore al passaggio del mouse */
+.greek-popover-trigger:hover {
+  background-color: #E4FBDA; 
+}
+
+/* ---  POPOVER  --- */
+.popover {
+  --bs-popover-bg: #fdfcf9;
+  --bs-popover-border-color: #000;
+  --bs-popover-header-bg: #E4FBDA;
+  --bs-popover-header-color: #000;
+  --bs-popover-body-color: #000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  max-width: 280px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.popover-header {
+  border-bottom: 1px solid rgba(141, 125, 101, 0.2);
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.popover-body {
+  font-family: inherit;
+}
+
+/* --- GALLERIA ORIZZONTALE (con scorrimento verticale del trackpad) --- */
+.horizontal-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 2rem 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  
+  cursor: grab;
+}
+
+.horizontal-scroll-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.horizontal-scroll-content {
+  display: inline-flex;
+  gap: 30px; 
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.gallery-item {
+  flex: 0 0 auto;
+  width: auto; 
+  height: 450px; 
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px);
+}
+
+.gallery-item img {
+  width: auto; 
+  height: 100%;
+  object-fit: contain; 
+  -webkit-filter: grayscale(100%); /* Safari */
+  filter: grayscale(100%);
+}
+
+/* --- PAGINA TESTI con sidebar a sinistra --- */
+.testi-wrapper {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  background: transparent;
+}
+
+.sidebar-left {
+  width: 250px;
+  flex-shrink: 0;
+  align-self: flex-start; 
+  background-color: #ffffff; 
+  backdrop-filter: blur(4px); 
+  -webkit-backdrop-filter: blur(4px); /* per WebKit/Safari */
+  padding: 6rem 2rem 2rem 2rem; /* Padding superiore per non finire sotto la navbar */
+  border-right: 1px solid #000; 
+  position: sticky;
+  top: 45px; 
+  height: calc(100vh - 45px); /* Altezza calcolata per occupare lo spazio rimanente sotto la navbar */
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-left h5 {
+  font-size: 1.55rem !important; 
+}
+
+.sidebar-left .form-select {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid #000; 
+  font-family: inherit;
+}
+
+.sidebar-left .form-label {  
+  letter-spacing: 0.5px;
+  color: #000 !important; 
+}
+
+#btnResetFilters:hover {
+  background-color: #E4FBDA !important;
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+.testi-main-content {
+  flex-grow: 1; 
+  padding: 2rem 0 4rem 0; 
+  background-color: #ffffff; 
+  box-shadow: none;
+  min-height: 100vh;
+}
+
+.testi-main-content h2 {
+  margin-left: 4rem; 
+  margin-top: 0;      
+  margin-bottom: 4rem !important; 
+  font-size: 2.5rem !important; 
+}
+
+.testi-table {  /*interstazioni della tabella*/
+  width: 100%;
+  border-collapse: separate; 
+  border-spacing: 0;
+  background-color: #ffffff; 
+}
+
+.testi-table tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #000 !important; 
+}
+
+/* Righe colorate alternate gestite con JavaScript */
+.testi-table tbody tr.zebra-row {
+  background-color: #F5FFF0;
+}
+
+.testi-table tbody tr:hover {
+  background-color: #FFFAE0; 
+}
+
+.testi-table th {
+  background-color: #E4FBDA; 
+  border-bottom: 2px solid #000 !important; 
+  text-transform: uppercase;
+  padding: 15px;
+  letter-spacing: 1px;
+  font-family: 'Baskervville', serif !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important; 
+}
+
+.testi-table td {
+  padding: 15px;
+  vertical-align: top;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 991px) {     /* Layout responsive  */
+  .testi-wrapper { flex-direction: column; }
+  .sidebar-left {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    padding: 2rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(141, 125, 101, 0.2);
+  }
+}
+
+.modal-content-custom {
+  /* Modal della galleria */
+  background: #fdfcf9;
+  border: 1px solid #8d7d65;
+}
+
+/* --- NUOVI STILI CARD PERCORSI --- */
+.percorso-card {
+  background-color: transparent; 
+  border: none;                  
+  border-radius: 0;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.percorso-card:hover {
+  transform: scale(1.05);
+  box-shadow: none;       
+  z-index: 10;            
+}
+
+.percorso-card-img-wrapper {
+  width: 100%;
+  height: 380px; 
+  overflow: hidden;
+}
+
+.percorso-card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+
+.percorso-card:hover .percorso-card-img-wrapper img {
+  transform: none; /* Ho rimosso lo zoom interno per evitare il crop */
+}
+/*stile per informazioni scritte*/
+.percorso-card-body {
+  padding: 1rem; 
+  flex-grow: 1;
+}
+
+.percorso-card-title {
+  font-size: 1.9rem !important; 
+  font-weight: normal !important; 
+  margin-bottom: 0.2rem;
+  text-transform: none; 
+  color: #000;
+}
+
+.percorso-card-text {
+  font-size: 1.05rem; 
+  color: #000; 
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+/* Per linee orizzontali nere */
+hr {
+  border-top: 1px solid #000 !important;
+  opacity: 1 !important;
+}
